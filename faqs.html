@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF--8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQs - PathshalaOne</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.4.2/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.4.2/uicons-brands/css/uicons-brands.css'>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        // Theme script
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+    <script>
+        if (history.scrollRestoration) {
+            history.scrollRestoration = 'manual';
+        }
+    </script>
+    <script>
+        // Tailwind Config
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'], },
+                    colors: {
+                        'light-bg': '#fffcef',
+                        'dark-bg': '#100c08',
+                        'light-card': '#fbf9f0',
+                        'dark-card': '#201c18',
+                        orange: {
+                            '50': '#fff7ed', '100': '#ffedd5', '200': '#fed7aa', '300': '#fdba74',
+                            '400': '#fb923c', '500': '#f97316', '600': '#ea580c', '700': '#c2410c',
+                            '800': '#9a3412', '900': '#7c2d12', '950': '#431407',
+                        },
+                    },
+                     animation: {
+                        'theme-wipe': 'themeWipe 0.5s forwards'
+                    },
+                    keyframes: {
+                        themeWipe: {
+                            '0%': { transform: 'scaleY(0)', transformOrigin: '50% 50%' },
+                            '100%': { transform: 'scaleY(1)', transformOrigin: '50% 50%' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Custom styles for FAQ effects -->
+    <style>
+        /* Styles for click/toggle effect */
+        .faq-answer {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-in-out, opacity 0.4s ease-in-out;
+        }
+        .faq-item.open .faq-answer {
+            opacity: 1;
+        }
+
+        /* Styles for page load animation */
+        .faq-item {
+           opacity: 0;
+           transform: translateY(20px);
+           transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+        .faq-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-light-bg dark:bg-dark-bg text-slate-700 dark:text-slate-300 transition-colors duration-300">
+
+    <header class="sticky top-0 z-50 bg-light-bg/90 dark:bg-dark-bg/90 backdrop-blur-lg shadow-sm">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center space-x-3 cursor-pointer">
+                <i class="fi fi-rr-graduation-cap text-3xl sm:text-4xl text-orange-600"></i>
+                <h1 class="text-xl sm:text-2xl font-bold text-slate-800 dark:text-white">Pathshala<span class="text-orange-600">One</span></h1>
+            </a>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="index.html" class="font-semibold text-slate-600 dark:text-slate-300 hover:text-orange-600 transition-colors">Home</a>
+                <a href="about.html" class="font-semibold text-slate-600 dark:text-slate-300 hover:text-orange-600 transition-colors">About Us</a>
+                <a href="faqs.html" class="font-semibold text-orange-600 dark:text-orange-500">FAQs</a>
+            </div>
+            <div class="flex items-center space-x-2 sm:space-x-4">
+                <a href="login.html" class="px-4 py-2 font-semibold text-white bg-orange-600 rounded-lg hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 dark:focus:ring-offset-dark-bg transition-colors">
+                    <span>Login</span>
+                </a>
+                <button id="theme-toggle" class="p-2 rounded-full text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-dark-card focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 dark:focus:ring-offset-dark-bg">
+                    <i id="theme-icon-light" class="fi fi-rr-sun text-xl hidden"></i>
+                    <i id="theme-icon-dark" class="fi fi-rr-moon text-xl hidden"></i>
+                </button>
+                <button id="mobile-menu-button" class="md:hidden p-2 rounded-full text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-dark-card">
+                    <i class="fi fi-rr-menu-burger text-xl"></i>
+                </button>
+            </div>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden bg-light-bg dark:bg-dark-bg">
+            <a href="index.html" class="block py-3 px-6 text-lg font-semibold text-slate-600 dark:text-slate-300 hover:bg-orange-50 dark:hover:bg-dark-card">Home</a>
+            <a href="about.html" class="block py-3 px-6 text-lg font-semibold text-slate-600 dark:text-slate-300 hover:bg-orange-50 dark:hover:bg-dark-card">About Us</a>
+            <a href="faqs.html" class="block py-3 px-6 text-lg font-semibold text-orange-600 dark:text-orange-500 bg-orange-50 dark:bg-dark-card">FAQs</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-12 md:py-20">
+        <section>
+            <div class="text-center">
+                <span class="text-orange-600 font-semibold">HAVE QUESTIONS?</span>
+                <h3 class="mt-2 text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white">Frequently Asked Questions</h3>
+                <p class="mt-4 max-w-2xl mx-auto text-lg text-slate-600 dark:text-slate-400">Find answers to common questions about the PathshalaOne app.</p>
+            </div>
+            <div class="mt-12 max-w-3xl mx-auto space-y-4">
+                <div class="faq-item bg-white dark:bg-dark-card border border-slate-200 dark:border-gray-800 rounded-xl">
+                    <button class="faq-question w-full flex justify-between items-center text-left p-6">
+                        <span class="text-lg font-semibold text-slate-800 dark:text-white">Is the app free for parents and students?</span>
+                        <i class="fi fi-rr-angle-small-down text-2xl text-orange-600 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-answer px-6 pb-6 text-slate-600 dark:text-slate-400">
+                        <p>Yes, absolutely. The PathshalaOne app is completely free for all parents and students of our partner schools. The service is provided as part of the school's administrative package.</p>
+                    </div>
+                </div>
+                <div class="faq-item bg-white dark:bg-dark-card border border-slate-200 dark:border-gray-800 rounded-xl">
+                    <button class="faq-question w-full flex justify-between items-center text-left p-6">
+                        <span class="text-lg font-semibold text-slate-800 dark:text-white">How is my personal data protected?</span>
+                        <i class="fi fi-rr-angle-small-down text-2xl text-orange-600 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-answer px-6 pb-6 text-slate-600 dark:text-slate-400">
+                        <p>We take data security very seriously. All data is encrypted both in transit and at rest using industry-standard security protocols. We are fully compliant with data protection regulations to ensure your information is always safe and confidential.</p>
+                    </div>
+                </div>
+                <div class="faq-item bg-white dark:bg-dark-card border border-slate-200 dark:border-gray-800 rounded-xl">
+                    <button class="faq-question w-full flex justify-between items-center text-left p-6">
+                        <span class="text-lg font-semibold text-slate-800 dark:text-white">What devices does the app support?</span>
+                        <i class="fi fi-rr-angle-small-down text-2xl text-orange-600 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-answer px-6 pb-6 text-slate-600 dark:text-slate-400">
+                        <p>The PathshalaOne app is available for both iOS and Android devices. You can download it from the Apple App Store for iPhones and iPads, and from the Google Play Store for all Android phones and tablets.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-light-card dark:bg-[#0a0804] mt-24 md:mt-32">
+        <div class="container mx-auto px-6 py-8 text-center text-slate-500 dark:text-slate-400">
+            <p>&copy; 2024 <span class="font-semibold">PathshalaOne</span>. All Rights Reserved.</p>
+            <div class="mt-4 flex flex-col sm:flex-row justify-center items-center space-y-2 sm:space-y-0 sm:space-x-6">
+                <a href="mailto:contact@pathshalaone.com" class="hover:text-orange-600 transition-colors flex items-center gap-2"><i class="fi fi-rr-envelope text-xl"></i><span>contact@pathshalaone.com</span></a>
+                <a href="tel:+91-123-456-7890" class="hover:text-orange-600 transition-colors flex items-center gap-2"><i class="fi fi-rr-phone-call text-xl"></i><span>+91 123-456-7890</span></a>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="script.js"></script>
+    <script>
+        // Page-specific JavaScript for FAQ with fade effect
+        document.addEventListener('DOMContentLoaded', () => {
+            const faqItems = document.querySelectorAll('.faq-item');
+
+            // Staggered load animation for each FAQ item
+            faqItems.forEach((item, index) => {
+                setTimeout(() => {
+                    item.classList.add('visible');
+                }, 150 * index); // Stagger by 150ms
+            });
+
+            // Click handler for each FAQ item
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                const answer = item.querySelector('.faq-answer');
+                const icon = question.querySelector('i');
+
+                question.addEventListener('click', () => {
+                    const isOpen = item.classList.contains('open');
+
+                    // Close all other items first
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item) {
+                            otherItem.classList.remove('open');
+                            otherItem.querySelector('.faq-answer').style.maxHeight = null;
+                            otherItem.querySelector('i').classList.remove('rotate-180');
+                        }
+                    });
+
+                    // Then, toggle the clicked item
+                    if (!isOpen) {
+                        item.classList.add('open');
+                        icon.classList.add('rotate-180');
+                        // Set max-height after a tiny delay to allow the opacity transition to start
+                        setTimeout(() => {
+                           answer.style.maxHeight = answer.scrollHeight + 'px';
+                        }, 10);
+                    } else {
+                        item.classList.remove('open');
+                        icon.classList.remove('rotate-180');
+                        answer.style.maxHeight = null;
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+

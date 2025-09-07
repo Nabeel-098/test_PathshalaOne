@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About PathshalaOne</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.4.2/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.4.2/uicons-brands/css/uicons-brands.css'>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        // Theme script
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+    <script>
+        if (history.scrollRestoration) {
+            history.scrollRestoration = 'manual';
+        }
+    </script>
+    <script>
+        // Tailwind Config
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'], },
+                    colors: {
+                        'light-bg': '#fffcef',
+                        'dark-bg': '#100c08',
+                        'light-card': '#fbf9f0',
+                        'dark-card': '#201c18',
+                        orange: {
+                            '50': '#fff7ed', '100': '#ffedd5', '200': '#fed7aa', '300': '#fdba74',
+                            '400': '#fb923c', '500': '#f97316', '600': '#ea580c', '700': '#c2410c',
+                            '800': '#9a3412', '900': '#7c2d12', '950': '#431407',
+                        },
+                    },
+                     animation: {
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                        'fade-in': 'fadeIn 1s ease-out forwards',
+                        'theme-wipe': 'themeWipe 0.5s forwards'
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        themeWipe: {
+                            '0%': { transform: 'scaleY(0)', transformOrigin: '50% 50%' },
+                            '100%': { transform: 'scaleY(1)', transformOrigin: '50% 50%' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-light-bg dark:bg-dark-bg text-slate-700 dark:text-slate-300 transition-colors duration-300">
+
+    <header class="sticky top-0 z-50 bg-light-bg/90 dark:bg-dark-bg/90 backdrop-blur-lg shadow-sm">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center space-x-3 cursor-pointer">
+                <i class="fi fi-rr-graduation-cap text-3xl sm:text-4xl text-orange-600"></i>
+                <h1 class="text-xl sm:text-2xl font-bold text-slate-800 dark:text-white">Pathshala<span class="text-orange-600">One</span></h1>
+            </a>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="index.html" class="font-semibold text-slate-600 dark:text-slate-300 hover:text-orange-600 transition-colors">Home</a>
+                <a href="about.html" class="font-semibold text-orange-600 dark:text-orange-500">About Us</a>
+                <a href="faqs.html" class="font-semibold text-slate-600 dark:text-slate-300 hover:text-orange-600 transition-colors">FAQs</a>
+            </div>
+            <div class="flex items-center space-x-2 sm:space-x-4">
+                <a href="login.html" class="px-4 py-2 font-semibold text-white bg-orange-600 rounded-lg hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 dark:focus:ring-offset-dark-bg transition-colors">
+                    <span>Login</span>
+                </a>
+                <button id="theme-toggle" class="p-2 rounded-full text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-dark-card focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 dark:focus:ring-offset-dark-bg">
+                    <i id="theme-icon-light" class="fi fi-rr-sun text-xl hidden"></i>
+                    <i id="theme-icon-dark" class="fi fi-rr-moon text-xl hidden"></i>
+                </button>
+                 <button id="mobile-menu-button" class="md:hidden p-2 rounded-full text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-dark-card">
+                    <i class="fi fi-rr-menu-burger text-xl"></i>
+                </button>
+            </div>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden bg-light-bg dark:bg-dark-bg">
+            <a href="index.html" class="block py-3 px-6 text-lg font-semibold text-slate-600 dark:text-slate-300 hover:bg-orange-50 dark:hover:bg-dark-card">Home</a>
+            <a href="about.html" class="block py-3 px-6 text-lg font-semibold text-orange-600 dark:text-orange-500 bg-orange-50 dark:bg-dark-card">About Us</a>
+            <a href="faqs.html" class="block py-3 px-6 text-lg font-semibold text-slate-600 dark:text-slate-300 hover:bg-orange-50 dark:hover:bg-dark-card">FAQs</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-12 md:py-20">
+        <section>
+            <div class="bg-light-card dark:bg-dark-card/50 rounded-3xl p-8 md:p-12 animate-on-scroll opacity-0">
+                <div class="text-center">
+                    <h3 class="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white">About <span class="text-orange-600">PathshalaOne</span></h3>
+                    <p class="mt-4 max-w-3xl mx-auto text-lg text-slate-600 dark:text-slate-300">At PathshalaOne, our mission is to bridge the communication gap in education. We believe technology can empower teachers, inform parents, and inspire students. We're committed to simplifying school management so that institutions can focus on what truly matters: providing quality education.</p>
+                </div>
+
+                <div class="mt-12 pt-10 border-t border-slate-200 dark:border-gray-800">
+                    <h4 class="text-3xl font-extrabold text-center text-slate-900 dark:text-white animate-on-scroll opacity-0">Meet the Team</h4>
+                    <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-12">
+                        <!-- Team Members -->
+                        <div class="text-center flex flex-col items-center team-member-card opacity-0">
+                            <img src="https://placehold.co/400x400/fb923c/ffffff?text=Team+Lead" alt="Team Lead Photo" class="rounded-full w-40 h-40 object-cover shadow-xl ring-4 ring-orange-300 dark:ring-orange-800">
+                            <h5 class="mt-6 text-2xl font-bold text-slate-800 dark:text-white">Nabeel Syed</h5>
+                            <p class="text-orange-600 dark:text-orange-400 font-semibold">Team Leader & Backend Architect</p>
+                            <p class="mt-3 text-slate-600 dark:text-slate-400 max-w-sm">"As the team leader, I architected our FastAPI-based backend, ensuring a high-performance foundation while guiding our technical direction."</p>
+                             <div class="mt-4 flex justify-center space-x-4">
+                                <a href="#" class="text-slate-500 dark:text-slate-400 hover:text-orange-600 dark:hover:text-orange-500 transition-colors"><i class="fi fi-brands-linkedin text-2xl"></i></a>
+                                <a href="#" class="text-slate-500 dark:text-slate-400 hover:text-orange-600 dark:hover:text-orange-500 transition-colors"><i class="fi fi-brands-github text-2xl"></i></a>
+                            </div>
+                        </div>
+                        <div class="text-center flex flex-col items-center team-member-card opacity-0">
+                            <img src="https://placehold.co/400x400/ea580c/ffffff?text=Backend" alt="Backend Developer Photo" class="rounded-full w-40 h-40 object-cover shadow-xl ring-4 ring-orange-300 dark:ring-orange-800">
+                            <h5 class="mt-6 text-2xl font-bold text-slate-800 dark:text-white">Sharva Sabnis</h5>
+                            <p class="text-orange-600 dark:text-orange-400 font-semibold">Backend Developer</p>
+                            <p class="mt-3 text-slate-600 dark:text-slate-400 max-w-sm">"My focus was on building the comprehensive Django admin panel, creating a powerful and easy-to-use interface for school administrators."</p>
+                            <div class="mt-4 flex justify-center space-x-4">
+                                <a href="#" class="text-slate-500 dark:text-slate-400 hover:text-orange-600 dark:hover:text-orange-500 transition-colors"><i class="fi fi-brands-linkedin text-2xl"></i></a>
+                                <a href="#" class="text-slate-500 dark:text-slate-400 hover:text-orange-600 dark:hover:text-orange-500 transition-colors"><i class="fi fi-brands-github text-2xl"></i></a>
+                            </div>
+                        </div>
+                        <div class="text-center flex flex-col items-center team-member-card opacity-0">
+                            <img src="https://placehold.co/400x400/f97316/ffffff?text=UI/UX" alt="UI/UX Designer Photo" class="rounded-full w-40 h-40 object-cover shadow-xl ring-4 ring-orange-300 dark:ring-orange-800">
+                            <h5 class="mt-6 text-2xl font-bold text-slate-800 dark:text-white">Rehan Shaikh</h5>
+                            <p class="text-orange-600 dark:text-orange-400 font-semibold">UI/UX Designer</p>
+                            <p class="mt-3 text-slate-600 dark:text-slate-400 max-w-sm">"I was responsible for translating our design concepts into a responsive and intuitive user experience, ensuring the app is both beautiful and easy to use."</p>
+                            <div class="mt-4 flex justify-center space-x-4">
+                                <a href="#" class="text-slate-500 dark:text-slate-400 hover:text-orange-600 dark:hover:text-orange-500 transition-colors"><i class="fi fi-brands-linkedin text-2xl"></i></a>
+                                <a href="#" class="text-slate-500 dark:text-slate-400 hover:text-orange-600 dark:hover:text-orange-500 transition-colors"><i class="fi fi-brands-github text-2xl"></i></a>
+                            </div>
+                        </div>
+                        <div class="text-center flex flex-col items-center team-member-card opacity-0">
+                            <img src="https://placehold.co/400x400/fb923c/ffffff?text=Frontend" alt="Frontend Developer Photo" class="rounded-full w-40 h-40 object-cover shadow-xl ring-4 ring-orange-300 dark:ring-orange-800">
+                            <h5 class="mt-6 text-2xl font-bold text-slate-800 dark:text-white">Yuvraj Mourya</h5>
+                            <p class="text-orange-600 dark:text-orange-400 font-semibold">Frontend Developer</p>
+                            <p class="mt-3 text-slate-600 dark:text-slate-400 max-w-sm">"Working on the frontend, I helped craft a seamless and engaging user experience, ensuring the interface is both beautiful and functional."</p>
+                            <div class="mt-4 flex justify-center space-x-4">
+                                <a href="#" class="text-slate-500 dark:text-slate-400 hover:text-orange-600 dark:hover:text-orange-500 transition-colors"><i class="fi fi-brands-linkedin text-2xl"></i></a>
+                                <a href="#" class="text-slate-500 dark:text-slate-400 hover:text-orange-600 dark:hover:text-orange-500 transition-colors"><i class="fi fi-brands-github text-2xl"></i></a>
+                            </div>
+                        </div>
+                        <div class="text-center flex flex-col items-center team-member-card opacity-0">
+                            <img src="https://placehold.co/400x400/ea580c/ffffff?text=Integration" alt="Full-Stack Integration Photo" class="rounded-full w-40 h-40 object-cover shadow-xl ring-4 ring-orange-300 dark:ring-orange-800">
+                            <h5 class="mt-6 text-2xl font-bold text-slate-800 dark:text-white">Shivam Prajapati</h5>
+                            <p class="text-orange-600 dark:text-orange-400 font-semibold">Full-Stack Integration</p>
+                            <p class="mt-3 text-slate-600 dark:text-slate-400 max-w-sm">"I specialized in connecting the frontend with our backend APIs, ensuring smooth and reliable data communication throughout the application."</p>
+                            <div class="mt-4 flex justify-center space-x-4">
+                                <a href="#" class="text-slate-500 dark:text-slate-400 hover:text-orange-600 dark:hover:text-orange-500 transition-colors"><i class="fi fi-brands-linkedin text-2xl"></i></a>
+                                <a href="#" class="text-slate-500 dark:text-slate-400 hover:text-orange-600 dark:hover:text-orange-500 transition-colors"><i class="fi fi-brands-github text-2xl"></i></a>
+                            </div>
+                        </div>
+                        <div class="text-center flex flex-col items-center team-member-card opacity-0">
+                            <img src="https://placehold.co/400x400/f97316/ffffff?text=Database" alt="Database & QA Photo" class="rounded-full w-40 h-40 object-cover shadow-xl ring-4 ring-orange-300 dark:ring-orange-800">
+                            <h5 class="mt-6 text-2xl font-bold text-slate-800 dark:text-white">Nitya Mehta</h5>
+                            <p class="text-orange-600 dark:text-orange-400 font-semibold">Database & QA Specialist</p>
+                            <p class="mt-3 text-slate-600 dark:text-slate-400 max-w-sm">"My role involved managing the SQL database to ensure data integrity, while also conducting quality assurance to guarantee a stable app."</p>
+                             <div class="mt-4 flex justify-center space-x-4">
+                                <a href="#" class="text-slate-500 dark:text-slate-400 hover:text-orange-600 dark:hover:text-orange-500 transition-colors"><i class="fi fi-brands-linkedin text-2xl"></i></a>
+                                <a href="#" class="text-slate-500 dark:text-slate-400 hover:text-orange-600 dark:hover:text-orange-500 transition-colors"><i class="fi fi-brands-github text-2xl"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-16 pt-10 border-t border-slate-200 dark:border-gray-800 text-center animate-on-scroll opacity-0">
+                    <h4 class="text-3xl font-extrabold text-slate-900 dark:text-white">Our Vision for the Future</h4>
+                    <p class="mt-4 max-w-3xl mx-auto text-lg text-slate-600 dark:text-slate-300">
+                        "PathshalaOne was born from a shared passion to solve a real-world problem we all observed in the education system. Our goal was not just to build an app, but to create a connected community. Looking ahead, we envision expanding our platform with AI-driven analytics for personalized learning and integrating more tools to empower educators. This project is just the beginning of our journey to innovate education."
+                    </p>
+                    <p class="mt-4 text-lg font-semibold text-slate-800 dark:text-white">- The PathshalaOne Team</p>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-light-card dark:bg-[#0a0804] mt-24 md:mt-32">
+        <div class="container mx-auto px-6 py-8 text-center text-slate-500 dark:text-slate-400">
+            <p>&copy; 2024 <span class="font-semibold">PathshalaOne</span>. All Rights Reserved.</p>
+            <div class="mt-4 flex flex-col sm:flex-row justify-center items-center space-y-2 sm:space-y-0 sm:space-x-6">
+                <a href="mailto:contact@pathshalaone.com" class="hover:text-orange-600 transition-colors flex items-center gap-2"><i class="fi fi-rr-envelope text-xl"></i><span>contact@pathshalaone.com</span></a>
+                <a href="tel:+91-123-456-780" class="hover:text-orange-600 transition-colors flex items-center gap-2"><i class="fi fi-rr-phone-call text-xl"></i><span>+91 123-456-7890</span></a>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="script.js"></script>
+    <script>
+        // Page-specific JavaScript
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- On-scroll animations ---
+            const scrollElements = document.querySelectorAll('.animate-on-scroll');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Make the element visible and trigger the animation
+                        entry.target.classList.remove('opacity-0');
+                        entry.target.classList.add('animate-fade-in-up');
+                        // Stop observing once animated
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            // Observe all elements meant for scroll animation
+            scrollElements.forEach(el => { 
+                observer.observe(el); 
+            });
+
+            // --- Staggered animation for team members on load ---
+            const teamMembers = document.querySelectorAll('.team-member-card');
+            teamMembers.forEach((member, index) => {
+                setTimeout(() => {
+                    member.classList.remove('opacity-0');
+                    member.classList.add('animate-fade-in-up');
+                }, index * 350); // 0.35-second interval
+            });
+        });
+    </script>
+</body>
+</html>
